@@ -24,19 +24,26 @@ struct RBTNode {
 class RedBlackTree {
 	
 	public:
+		// regular constructor
 		RedBlackTree();
+		// contrusctor with int
 		RedBlackTree(int newData);
+		// copy constructor
 		RedBlackTree(const RedBlackTree &rbt);
 
 		string ToInfixString() const {return ToInfixString(root);};
 		string ToPrefixString() const { return ToPrefixString(root);};
 		string ToPostfixString() const { return ToPostfixString(root);};
 
+		// takes an integer to insert and returns void, complicated, lots of cases
 		void Insert(int newData);
 
+		// takes an integer and returns true if the integer is in the tree
 		bool Contains(int data) const ;
 		size_t Size() const {return numItems;};
+		// returns min int
 		int GetMin() const;
+		// returns max int
 		int GetMax() const;
 		
 	
