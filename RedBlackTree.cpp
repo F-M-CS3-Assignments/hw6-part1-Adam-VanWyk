@@ -34,7 +34,9 @@ bool RedBlackTree::Contains(int data) const{
 
 
 void RedBlackTree::Insert(int newData){
-    if(Contains(newData)){return;}
+    if(Contains(newData)){
+        throw invalid_argument("Value already in tree. ");
+    }
 
     RBTNode* newNode = new RBTNode;
     newNode->data = newData;
@@ -60,5 +62,7 @@ void RedBlackTree::Insert(int newData){
 
 
 
-
+    delete newNode;
 }
+
+
