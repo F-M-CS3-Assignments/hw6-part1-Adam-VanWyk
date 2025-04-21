@@ -15,13 +15,15 @@ RedBlackTree::RedBlackTree(int newData){
 
 
 void RedBlackTree::Insert(int newData){
+    if(Contains(newData)){return;}
+
     RBTNode* newNode = new RBTNode;
     newNode->data = newData;
     newNode->color = 0;
 
-
     if (root = nullptr){
         root = newNode;
+        newNode->color = 1;
         return;
     }
     
@@ -33,13 +35,14 @@ void RedBlackTree::Insert(int newData){
             currNode = currNode->left;
         }
     }
+    currNode = newNode;
 
 
 }
 
 bool RedBlackTree::Contains(int data) const{
     if (Size() == 0){return false;}
-    
+
     RBTNode* currNode = root;
 
     while(currNode != nullptr && !currNode->IsNullNode){
@@ -52,7 +55,5 @@ bool RedBlackTree::Contains(int data) const{
             currNode = currNode->right;
         }
     }
-
-
     return false;
 }
