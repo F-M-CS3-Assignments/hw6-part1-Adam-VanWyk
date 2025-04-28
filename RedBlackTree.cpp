@@ -104,6 +104,20 @@ bool RedBlackTree::Contains(int data) const{
     return false;
 }
 
+RBTNode * RedBlackTree::GetUncle(RBTNode *node) const{
+    if (node == nullptr || node->parent == nullptr || node->parent->parent == nullptr){
+        return nullptr; // no node parent or grangparent, no uncle
+    }
+
+    RBTNode* parent = node->parent;
+    RBTNode* grand_parent = parent->parent;
+
+    if(grand_parent->left == parent){
+        return grand_parent->right;
+    } else{
+        return grand_parent->left;
+    }
+}
 
 void RedBlackTree::Insert(int newData){
     if(Contains(newData)){
@@ -143,6 +157,9 @@ void RedBlackTree::Insert(int newData){
         else{parent->right = newNode;}
     }
     if(newNode->parent->color == 1){return;}
+    else if(newNode->parent->color == 0){
+        // get uncle (if black or null make rotation) (if red perform recolor)
+    }
 
 
 
