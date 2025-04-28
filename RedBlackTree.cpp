@@ -21,22 +21,22 @@ string RedBlackTree::ToInfixString(const RBTNode *n){
     }
     string left = ToInfixString(n->left);
     string right = ToInfixString(n->right);
-    string final = " ";
+    string final;
 
     if(!left.empty()){
-        final += left + " ";
+        final += left;
     }
     if(n->color == 1){
-        final += "B";
+        final += " B";
     } else{
-        final += "R";
+        final += " R";
     }
-    final += to_string(n->data);
+    final += to_string(n->data) + " ";
 
     if (!right.empty()){
-        final += " " + right;
+        final += right;
     }
-    return final + " ";
+    return final;
 }
 string RedBlackTree::ToPrefixString(const RBTNode *n){
     if (n == nullptr || n->IsNullNode){
@@ -44,22 +44,22 @@ string RedBlackTree::ToPrefixString(const RBTNode *n){
     }
     string left = ToPrefixString(n->left);
     string right = ToPrefixString(n->right);
-    string final = " ";
+    string final;
 
     if(n->color == 1){
-        final += "B";
+        final += " B";
     } else{
-        final += "R";
+        final += " R";
     }
-    final += to_string(n->data);
+    final += to_string(n->data) + " ";
 
     if(!left.empty()){
-        final += " " + left;
+        final += left;
     }
     if (!right.empty()){
-        final += " " + right;
+        final += right;
     }
-    return final + " ";
+    return final;
 }
 string RedBlackTree::ToPostfixString(const RBTNode *n){
     if (n == nullptr || n->IsNullNode){
@@ -67,22 +67,22 @@ string RedBlackTree::ToPostfixString(const RBTNode *n){
     }
     string left = ToPostfixString(n->left);
     string right = ToPostfixString(n->right);
-    string final = " ";
+    string final;
 
     if(!left.empty()){
-        final += left + " ";
+        final += left;
     }
     if (!right.empty()){
-        final += right + " ";
+        final += right;
     }
     
     if(n->color == 1){
-        final += "B";
+        final += " B";
     } else{
-        final += "R";
+        final += " R";
     }
-    final += to_string(n->data);
-    return final = " ";
+    final += to_string(n->data) + " ";
+    return final;
 }
 		
 
@@ -127,7 +127,7 @@ void RedBlackTree::Insert(int newData){
     RBTNode* currNode = root;
     RBTNode* parent = nullptr;
 
-    while(!currNode->IsNullNode && currNode != nullptr){
+    while(currNode != nullptr && !currNode->IsNullNode){
         parent = currNode;
         if(newData < currNode->data){
             currNode = currNode->left;
@@ -135,10 +135,13 @@ void RedBlackTree::Insert(int newData){
             currNode = currNode->right;
         }
     }
-    newNode->parent = parent;
-    if(newData < parent->data){parent->left = newNode;}
-    else{parent->right = newNode;}
-
+    if (parent == nullptr){
+        root = newNode;
+    } else{
+        newNode->parent = parent;
+        if(newData < parent->data){parent->left = newNode;}
+        else{parent->right = newNode;}
+    }
     if(newNode->parent->color == 1){return;}
 
 

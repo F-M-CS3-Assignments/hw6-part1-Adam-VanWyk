@@ -39,6 +39,7 @@ void TestInsertSecondNode(){
 	RedBlackTree *rbt = new RedBlackTree();
 	rbt->Insert(30);
 	rbt->Insert(15);
+	//cout << rbt->ToPrefixString() << endl;
 	assert(rbt->ToPrefixString() == " B30  R15 ");
 	delete rbt;
 	
