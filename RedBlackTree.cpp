@@ -130,7 +130,20 @@ bool RedBlackTree::RBTreeReplaceChild(RBTNode* parent, RBTNode* currentChild, RB
 
 
 void RedBlackTree::LeftRotate(RBTNode *node){
+    if (node == nullptr || node->right == nullptr){
+        return;
+    }
 
+    RBTNode* rightLeftChild = node->right->left;
+    if (node->parent != nullptr){
+        RBTreeReplaceChild(node->parent, node, node->right);
+    } else{
+        root = node->right;
+        root->parent = nullptr;
+    }
+
+    RBTreeSetChild(node->right, "left", node);
+    RBTreeSetChild(node, "right", rightLeftChild);
 }
 
 void RedBlackTree::RightRotate(RBTNode *node){
