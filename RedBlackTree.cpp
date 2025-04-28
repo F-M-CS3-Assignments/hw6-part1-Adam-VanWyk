@@ -104,6 +104,39 @@ bool RedBlackTree::Contains(int data) const{
     return false;
 }
 
+
+bool RedBlackTree::RBTreeSetChild(RBTNode* parent, string whichChild, RBTNode* child){
+    if (whichChild != "left" && whichChild != "right"){
+        return false;
+    }
+    if (whichChild == "left"){
+        parent->left = child;
+    } else{
+        parent->right = child;
+    }
+    if (child != nullptr){
+        child->parent = parent;
+    } return true;
+}
+
+bool RedBlackTree::RBTreeReplaceChild(RBTNode* parent, RBTNode* currentChild, RBTNode* newChild){
+    if (parent->left == currentChild){
+        return RBTreeSetChild(parent, "left", newChild);
+    } else if (parent->right == currentChild){
+        return RBTreeSetChild(parent, "right", newChild);
+    }
+    return false;
+}
+
+
+void RedBlackTree::LeftRotate(RBTNode *node){
+
+}
+
+void RedBlackTree::RightRotate(RBTNode *node){
+
+}
+		
 RBTNode * RedBlackTree::GetUncle(RBTNode *node) const{
     if (node == nullptr || node->parent == nullptr || node->parent->parent == nullptr){
         return nullptr; // no node parent or grangparent, no uncle

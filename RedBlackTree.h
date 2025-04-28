@@ -66,6 +66,9 @@ class RedBlackTree {
 		bool IsLeftChild(RBTNode *node) const;
 		bool IsRightChild(RBTNode *node) const;
 		
+		bool RBTreeSetChild(RBTNode* parent, string whichChild, RBTNode* child);
+		bool RBTreeReplaceChild(RBTNode* parent, RBTNode* currentChild, RBTNode* newChild);
+
 		void LeftRotate(RBTNode *node);
 		void RightRotate(RBTNode *node);
 		
