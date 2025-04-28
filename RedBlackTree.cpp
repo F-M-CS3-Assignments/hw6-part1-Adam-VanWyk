@@ -9,8 +9,10 @@ using namespace std;
 RedBlackTree::RedBlackTree() = default;
 
 RedBlackTree::RedBlackTree(int newData){
-    RBTNode* root = new RBTNode;
+    root = new RBTNode;
     root->data = newData;
+    root->color = 1;
+    root->IsNullNode = false;
 }
 
 
@@ -41,22 +43,31 @@ void RedBlackTree::Insert(int newData){
     RBTNode* newNode = new RBTNode;
     newNode->data = newData;
     newNode->color = 0;
+    newNode->left = nullptr;
+    newNode->right = nullptr;
+    newNode->parent = nullptr;
+    newNode->IsNullNode = false;
 
-    if (root = nullptr){
+    if (root == nullptr){
         root = newNode;
         newNode->color = 1;
         return;
     }
     
     RBTNode* currNode = root;
-    while(currNode->IsNullNode = false){
-        if(newNode->data > currNode->data){
-            currNode = currNode->right;
-        } else if(newNode->data < currNode->data){
+    RBTNode* parent = nullptr;
+
+    while(!currNode->IsNullNode && currNode != nullptr){
+        parent = currNode;
+        if(newData < currNode->data){
             currNode = currNode->left;
+        } else{
+            currNode = currNode->right;
         }
     }
-    currNode = newNode;
+    newNode->parent = parent;
+    if(newData < parent->data){parent->left = newNode;}
+    else{parent->right = newNode;}
 
     if(newNode->parent->color == 1){return;}
 
