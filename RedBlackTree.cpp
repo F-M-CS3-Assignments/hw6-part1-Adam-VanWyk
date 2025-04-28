@@ -119,6 +119,30 @@ RBTNode * RedBlackTree::GetUncle(RBTNode *node) const{
     }
 }
 
+void RedBlackTree::InsertFixUp(RBTNode *node){
+
+    if (node == root || node->parent->color == 1){
+        root->color = 1;
+        return;
+    }
+
+    RBTNode* parent = node->parent;
+    RBTNode* grandparent = parent->parent;
+    RBTNode* uncle = GetUncle(node);
+
+    if(uncle != nullptr && uncle->color == 0){ // uncle is red - recolor
+        parent->color = 1;
+        uncle->color = 1;
+        grandparent->color = 0;
+        InsertFixUp(grandparent); // call for grandparent 
+    } 
+    else{ // uncle is black - rotate
+        
+
+    }
+
+}
+
 void RedBlackTree::Insert(int newData){
     if(Contains(newData)){
         throw invalid_argument("Value already in tree. ");
@@ -156,11 +180,8 @@ void RedBlackTree::Insert(int newData){
         if(newData < parent->data){parent->left = newNode;}
         else{parent->right = newNode;}
     }
-    if(newNode->parent->color == 1){return;}
-    else if(newNode->parent->color == 0){
-        // get uncle (if black or null make rotation) (if red perform recolor)
-    }
 
+    InsertFixUp(newNode);
 
 
     delete newNode;
