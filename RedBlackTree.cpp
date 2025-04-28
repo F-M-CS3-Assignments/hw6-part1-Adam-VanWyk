@@ -21,7 +21,7 @@ string RedBlackTree::ToInfixString(const RBTNode *n){
     }
     string left = ToInfixString(n->left);
     string right = ToInfixString(n->right);
-    string final;
+    string final = " ";
 
     if(!left.empty()){
         final += left + " ";
@@ -36,7 +36,7 @@ string RedBlackTree::ToInfixString(const RBTNode *n){
     if (!right.empty()){
         final += " " + right;
     }
-    return final;
+    return final + " ";
 }
 string RedBlackTree::ToPrefixString(const RBTNode *n){
     if (n == nullptr || n->IsNullNode){
@@ -44,7 +44,7 @@ string RedBlackTree::ToPrefixString(const RBTNode *n){
     }
     string left = ToPrefixString(n->left);
     string right = ToPrefixString(n->right);
-    string final;
+    string final = " ";
 
     if(n->color == 1){
         final += "B";
@@ -59,7 +59,7 @@ string RedBlackTree::ToPrefixString(const RBTNode *n){
     if (!right.empty()){
         final += " " + right;
     }
-    return final;
+    return final + " ";
 }
 string RedBlackTree::ToPostfixString(const RBTNode *n){
     if (n == nullptr || n->IsNullNode){
@@ -67,7 +67,7 @@ string RedBlackTree::ToPostfixString(const RBTNode *n){
     }
     string left = ToPostfixString(n->left);
     string right = ToPostfixString(n->right);
-    string final;
+    string final = " ";
 
     if(!left.empty()){
         final += left + " ";
@@ -82,7 +82,7 @@ string RedBlackTree::ToPostfixString(const RBTNode *n){
         final += "R";
     }
     final += to_string(n->data);
-    return final;
+    return final = " ";
 }
 		
 
@@ -144,6 +144,7 @@ void RedBlackTree::Insert(int newData){
 
 
     delete newNode;
+    return;
 }
 
 
