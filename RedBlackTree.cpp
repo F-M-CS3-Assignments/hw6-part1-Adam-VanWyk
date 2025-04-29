@@ -256,7 +256,8 @@ void RedBlackTree::Insert(int newData){
         if(newData < parent->data){parent->left = newNode;}
         else{parent->right = newNode;}
     }
-
+    
+    numItems++;
     InsertFixUp(newNode);
 
     return;
