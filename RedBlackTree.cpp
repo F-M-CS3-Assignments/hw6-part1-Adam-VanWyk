@@ -194,11 +194,29 @@ void RedBlackTree::InsertFixUp(RBTNode *node){
         grandparent->color = 0;
         InsertFixUp(grandparent); // call for grandparent 
     } 
-    else{ // uncle is black - rotate
-        
+    else{ 
+        if (parent == grandparent->left){
+            if (node == parent->right){
+                LeftRotate(parent);
+                node = parent;
+                parent = node->parent;
+            }
 
+            parent->color = 1;
+            grandparent->color = 0;
+            RightRotate(grandparent);
+        }
+        else{
+            if (node == parent->left){
+                RightRotate(parent);
+                node = parent;
+                parent = node->parent;
+            }
+            parent->color = 1;
+            grandparent->color = 0;
+            LeftRotate(grandparent);
+        }
     }
-
 }
 
 void RedBlackTree::Insert(int newData){
@@ -241,8 +259,6 @@ void RedBlackTree::Insert(int newData){
 
     InsertFixUp(newNode);
 
-
-    delete newNode;
     return;
 }
 
